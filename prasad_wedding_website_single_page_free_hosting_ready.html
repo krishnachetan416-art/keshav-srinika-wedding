@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pramod (Keshav) ❤️ Srinika (Jeevana) | Wedding Invitation</title>
+  <meta name="description" content="You're invited to celebrate the wedding of Pramod (Keshav) and Srinika (Jeevana)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#faf7f4; --ink:#1b1b1b; --muted:#6b6b6b; --brand:#9b5de5; --accent:#f15bb5;
+      --card:#ffffff; --ring:#e7ddd2; --gold:#b9935a;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Poppins,system-ui,Arial,sans-serif}
+    img{max-width:100%;height:auto;display:block}
+    a{color:var(--brand);text-decoration:none}
+    .container{max-width:1100px;margin-inline:auto;padding:20px}
+    .hero{position:relative;isolation:isolate;border-bottom:1px solid var(--ring);}
+    .hero-inner{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;padding:40px 20px}
+    .names{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,54px);line-height:1.05;margin:0}
+    .sub{color:var(--muted);margin-top:10px}
+    .pill{display:inline-flex;gap:10px;align-items:center;border:1px solid var(--ring);padding:8px 14px;border-radius:999px;background:var(--card)}
+    .btn{display:inline-block;padding:12px 18px;border-radius:10px;border:1px solid var(--ring);background:var(--ink);color:white;font-weight:600}
+    .btn.alt{background:white;color:var(--ink)}
+    .card{background:var(--card);border:1px solid var(--ring);border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.04)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .section{padding:48px 20px;border-bottom:1px solid var(--ring)}
+    .h2{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,36px);margin:0 0 12px}
+    .h3{font-family:'Playfair Display',serif;font-size:22px;margin:0 0 8px}
+    .center{text-align:center}
+    .gold{color:var(--gold)}
+    .gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+    .gallery img{border-radius:12px}
+    .footer{padding:28px 20px;text-align:center;color:var(--muted)}
+    .badge{position:absolute;inset:auto 20px 20px auto;background:var(--card);border:1px solid var(--ring);padding:10px 14px;border-radius:12px}
+    .rsvp{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .ornament{height:1px;background:linear-gradient(90deg,transparent, var(--ring), transparent);margin:18px 0}
+    @media (max-width: 880px){.hero-inner{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(3,1fr)}}
+    @media (min-width: 881px) and (max-width: 1180px){.gallery{grid-template-columns:repeat(4,1fr)}}
+  </style>
+  <script>
+    function makeICS({uid, title, startLocal, endLocal, location, description}){
+      const esc = s => (s||"").replace(/[
+]/g, "
+").replace(/,/g, '\,');
+      const pad = n => (n<10? '0'+n : ''+n);
+      function fmt(dt){
+        const y=dt.getFullYear(), m=pad(dt.getMonth()+1), d=pad(dt.getDate()), hh=pad(dt.getHours()), mm=pad(dt.getMinutes());
+        return `${y}${m}${d}T${hh}${mm}00`;
+      }
+      const dtstamp = new Date();
+      const ics = ([
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//PramodWedsSrinika//EN',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `UID:${uid}`,
+        `DTSTAMP:${fmt(new Date(Date.UTC(dtstamp.getFullYear(),dtstamp.getMonth(),dtstamp.getDate(),dtstamp.getHours(),dtstamp.getMinutes())))}Z`,
+        `DTSTART;TZID=Asia/Kolkata:${fmt(startLocal)}`,
+        `DTEND;TZID=Asia/Kolkata:${fmt(endLocal)}`,
+        `SUMMARY:${esc(title)}`,
+        `LOCATION:${esc(location)}`,
+        `DESCRIPTION:${esc(description)}`,
+        'END:VEVENT',
+        'END:VCALENDAR']
+      ).join('
+');
+      return new Blob([ics], {type:'text/calendar;charset=utf-8'});
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const wedStart = new Date(2025,9,26,10,30);
+      const wedEnd   = new Date(2025,9,26,12,30);
+      const recStart = new Date(2025,9,29,12,0);
+      const recEnd   = new Date(2025,9,29,14,0);
+      const wedBlob = makeICS({
+        uid:'wedding-20251026@family',
+        title:'Wedding Ceremony – Pramod (Keshav) & Srinika (Jeevana)',
+        startLocal: wedStart,
+        endLocal: wedEnd,
+        location: 'Peddabavi Malla Reddy Gardens',
+        description: 'Muhurtham at 10:30 AM. #PramodWedsSrinika'
+      });
+      const recBlob = makeICS({
+        uid:'reception-20251029@family',
+        title:'Reception – Pramod (Keshav) & Srinika (Jeevana)',
+        startLocal: recStart,
+        endLocal: recEnd,
+        location: 'TSR Banquet Hall, Morthad',
+        description: 'Greetings from 12:00 PM onwards. #PramodWedsSrinika'
+      });
+      const wedURL = URL.createObjectURL(wedBlob);
+      const recURL = URL.createObjectURL(recBlob);
+      const a1 = document.getElementById('ics-wedding');
+      const a2 = document.getElementById('ics-reception');
+      if(a1){ a1.href = wedURL; a1.download = 'Wedding-26Oct.ics'; }
+      if(a2){ a2.href = recURL; a2.download = 'Reception-29Oct.ics'; }
+    });
+  </script>
+</head>
+<body>
+  <header class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="pill" aria-label="Invitation">
+          <span>Wedding Invitation</span>
+          <span>•</span>
+          <time datetime="2025-10-26">26 Oct</time>
+          <span>• Hyderabad</span>
+        </span>
+        <h1 class="names">Pramod (Keshav) <span class="gold">&amp;</span> Srinika (Jeevana)</h1>
+        <p class="sub">With the blessings of our families, we invite you to join us as we begin our forever. Your presence will make our celebrations complete.</p>
+        <div class="rsvp">
+          <a class="btn" href="#venues">View Venues &amp; Maps</a>
+          <a class="btn alt" href="#gallery">Photos</a>
+        </div>
+      </div>
+      <div class="card" aria-label="Couple Photo">
+        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1600&auto=format&fit=crop" alt="Bride and Groom" />
+      </div>
+    </div>
+    <div class="badge">#PramodWedsSrinika</div>
+  </header>
+
+  <!-- SAVE THE DATE BANNER -->
+  <section class="section" id="save-the-date">
+    <div class="container center">
+      <h2 class="h2">Save the Date</h2>
+      <p class="sub">Mark your calendars and be part of our celebrations</p>
+      <img src="https://images.unsplash.com/photo-1521540216272-a50305cd4421?q=80&w=1600&auto=format&fit=crop" alt="Save the Date" style="max-width:100%;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,.08)"/>
+    </div>
+  </section>
+
+  <section class="section" id="save-the-date">
+    <div class="container">
+      <h2 class="h2 center">Save the Date</h2>
+      <div class="card" style="overflow:hidden">
+        <!-- Replace with your banner: ./photos/save-the-date.jpg -->
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1800&auto=format&fit=crop" alt="Save the Date – Pramod & Srinika"/>
+      </div>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="card center">
+          <h3 class="h3">Wedding Countdown</h3>
+          <p style="margin:8px 0 14px">Sunday, 26 Oct · 10:30 AM</p>
+          <div style="display:flex;justify-content:center;gap:14px;font-weight:600">
+            <div><div id="c1-d" style="font-size:28px">--</div><div class="sub">Days</div></div>
+            <div><div id="c1-h" style="font-size:28px">--</div><div class="sub">Hours</div></div>
+            <div><div id="c1-m" style="font-size:28px">--</div><div class="sub">Mins</div></div>
+            <div><div id="c1-s" style="font-size:28px">--</div><div class="sub">Secs</div></div>
+          </div>
+        </div>
+        <div class="card center">
+          <h3 class="h3">Reception Countdown</h3>
+          <p style="margin:8px 0 14px">Wednesday, 29 Oct · 12:00 PM</p>
+          <div style="display:flex;justify-content:center;gap:14px;font-weight:600">
+            <div><div id="c2-d" style="font-size:28px">--</div><div class="sub">Days</div></div>
+            <div><div id="c2-h" style="font-size:28px">--</div><div class="sub">Hours</div></div>
+            <div><div id="c2-m" style="font-size:28px">--</div><div class="sub">Mins</div></div>
+            <div><div id="c2-s" style="font-size:28px">--</div><div class="sub">Secs</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="invite">
+    <div class="container">
+      <h2 class="h2 center">You're Warmly Invited</h2>
+      <p class="center" style="max-width:820px;margin:0 auto">
+        Please join us for the wedding celebrations of <strong>Pramod (Keshav)</strong> and <strong>Srinika (Jeevana)</strong>.
+      </p>
+      <div class="ornament"></div>
+      <div class="grid-3">
+        <div class="card center">
+          <h3 class="h3">Wedding Ceremony</h3>
+          <p><strong>Sunday, 26 Oct</strong><br/>Muhurtham: <strong>10:30 AM onwards</strong></p>
+          <p>Peddabavi Malla Reddy Gardens</p>
+        </div>
+        <div class="card center">
+          <h3 class="h3">Reception</h3>
+          <p><strong>Wednesday, 29 Oct</strong><br/><strong>12:00 PM onwards</strong></p>
+          <p>TSR Banquet Hall, Morthad</p>
+        </div>
+        <div class="card center">
+          <h3 class="h3">Dress Code</h3>
+          <p>Traditional / Festive</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="timeline">
+    <div class="container">
+      <h2 class="h2 center">Schedule Timeline</h2>
+      <div class="card">
+        <ul>
+          <li><strong>26 Oct, 10:30 AM</strong> – Wedding Ceremony at Peddabavi Malla Reddy Gardens</li>
+          <li><strong>29 Oct, 12:00 PM</strong> – Reception at TSR Banquet Hall, Morthad</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="venues">
+    <div class="container">
+      <h2 class="h2 center">Venues &amp; Maps</h2>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="card">
+          <h3 class="h3">Wedding Hall – Peddabavi Malla Reddy Gardens</h3>
+          <p>Open the map below for exact location</p>
+          <div style="aspect-ratio:16/9;border:1px solid var(--ring);border-radius:12px;overflow:hidden">
+            <iframe title="Wedding Hall Map" width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Peddabavi%20Malla%20Reddy%20Gardens&output=embed">
+            </iframe>
+          </div>
+          <p style="margin-top:10px"><a target="_blank" href="https://share.google/2FT3TKwVKyTsUDhiT">Open in Google Maps</a></p>
+        </div>
+        <div class="card">
+          <h3 class="h3">Reception – TSR Banquet Hall, Morthad</h3>
+          <p>Open the map below for exact location</p>
+          <div style="aspect-ratio:16/9;border:1px solid var(--ring);border-radius:12px;overflow:hidden">
+            <iframe title="Reception Venue Map" width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=TSR%20Banquet%20Hall%20Morthad&output=embed">
+            </iframe>
+          </div>
+          <p style="margin-top:10px"><a target="_blank" href="https://share.google/csIWoANG4jK6kqpVi">Open in Google Maps</a></p>
+        </div>
+      </div>
+
+      <!-- Added: Schedule + ICS + QR -->
+      <div class="grid-2" style="margin-top:24px">
+        <div class="card">
+          <h3 class="h3">Schedule</h3>
+          <ul style="list-style:none;padding:0;margin:0">
+            <li style="padding:10px 0;border-bottom:1px dashed var(--ring)"><strong>Sun, 26 Oct · 10:30 AM</strong> — Wedding Muhurtham at Peddabavi Malla Reddy Gardens</li>
+            <li style="padding:10px 0;border-bottom:1px dashed var(--ring)"><strong>Post‑ceremony</strong> — Blessings & light refreshments</li>
+            <li style="padding:10px 0"><strong>Wed, 29 Oct · 12:00 PM</strong> — Reception at TSR Banquet Hall, Morthad</li>
+          </ul>
+          <div class="rsvp" style="margin-top:14px">
+            <a id="ics-wedding" class="btn" href="#">Add Wedding (.ics)</a>
+            <a id="ics-reception" class="btn alt" href="#">Add Reception (.ics)</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="h3">Scan to Open Maps</h3>
+          <p class="sub">Point your camera to open the venue in Google Maps.</p>
+          <div class="grid-2">
+            <div class="center">
+              <p><strong>Wedding Hall</strong></p>
+              <img alt="QR to Wedding Map" style="margin:0 auto;max-width:180px" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fshare.google%2F2FT3TKwVKyTsUDhiT"/>
+            </div>
+            <div class="center">
+              <p><strong>Reception</strong></p>
+              <img alt="QR to Reception Map" style="margin:0 auto;max-width:180px" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fshare.google%2FcsIWoANG4jK6kqpVi"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="calendar">
+    <div class="container center">
+      <h2 class="h2">Save the Dates</h2>
+      <p>Download calendar invites to save the events.</p>
+      <a class="btn" href="wedding.ics" download>📅 Wedding Ceremony</a>
+      <a class="btn alt" href="reception.ics" download>📅 Reception</a>
+    </div>
+  </section>
+
+  <section class="section" id="qr">
+    <div class="container center">
+      <h2 class="h2">Quick Access</h2>
+      <p>Scan this QR code to open the Wedding Venue directly in Google Maps.</p>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://share.google/2FT3TKwVKyTsUDhiT" alt="QR to Wedding Venue"/>
+    </div>
+  </section>
+
+  <section class="section" id="gallery">
+    <div class="container">
+      <h2 class="h2 center">Gallery</h2>
+      <div class="gallery">
+        <!-- Replace with real photos -->
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="Couple"/>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Made with ❤️ by the family · See you at the celebrations!</p>
+    <!-- COUNTDOWN TIMERS -->
+  <section class="section" id="countdown">
+    <div class="container">
+      <h2 class="h2 center">Countdown to Celebrations</h2>
+      <div class="grid-2" style="margin-top:20px">
+        <div class="card center">
+          <h3 class="h3">Wedding Ceremony</h3>
+          <p id="countdown-wedding" style="font-size:22px;font-weight:600;color:var(--brand)"></p>
+        </div>
+        <div class="card center">
+          <h3 class="h3">Reception</h3>
+          <p id="countdown-reception" style="font-size:22px;font-weight:600;color:var(--accent)"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Made with ❤️ by the family · See you at the celebrations!</p>
+  </footer>
+
+  <script>
+    function countdownTimer(id, targetDate){
+      function update(){
+        const now = new Date().getTime();
+        const dist = targetDate - now;
+        if(dist<0){ document.getElementById(id).textContent = "It's today!"; return; }
+        const days = Math.floor(dist/(1000*60*60*24));
+        const hrs = Math.floor((dist%(1000*60*60*24))/(1000*60*60));
+        const mins = Math.floor((dist%(1000*60*60))/(1000*60));
+        const secs = Math.floor((dist%(1000*60))/1000);
+        document.getElementById(id).textContent = days+"d "+hrs+"h "+mins+"m "+secs+"s";
+      }
+      update();
+      setInterval(update,1000);
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      countdownTimer('countdown-wedding', new Date(2025,9,26,10,30).getTime());
+      countdownTimer('countdown-reception', new Date(2025,9,29,12,0).getTime());
+    });
+  </script>
+<script>
+  (function(){
+    function startCountdown(targetDate, ids){
+      function tick(){
+        var now = new Date();
+        var diff = targetDate - now;
+        var d=0,h=0,m=0,s=0;
+        if(diff > 0){
+          s = Math.floor(diff/1000);
+          d = Math.floor(s/86400); s -= d*86400;
+          h = Math.floor(s/3600); s -= h*3600;
+          m = Math.floor(s/60); s -= m*60;
+        } else {
+          document.getElementById(ids.d).innerText = '0';
+          document.getElementById(ids.h).innerText = '0';
+          document.getElementById(ids.m).innerText = '0';
+          document.getElementById(ids.s).innerText = '0';
+          return; // stop updating after time passed
+        }
+        document.getElementById(ids.d).innerText = d;
+        document.getElementById(ids.h).innerText = h;
+        document.getElementById(ids.m).innerText = m;
+        document.getElementById(ids.s).innerText = s;
+      }
+      tick();
+      return setInterval(tick, 1000);
+    }
+    // Asia/Kolkata local times (month index 0-based, so 9 = October)
+    var wedding = new Date(2025, 9, 26, 10, 30, 0);
+    var reception = new Date(2025, 9, 29, 12, 0, 0);
+    startCountdown(wedding,  {d:'c1-d', h:'c1-h', m:'c1-m', s:'c1-s'});
+    startCountdown(reception,{d:'c2-d', h:'c2-h', m:'c2-m', s:'c2-s'});
+  })();
+</script>
+</body>
+</html>
